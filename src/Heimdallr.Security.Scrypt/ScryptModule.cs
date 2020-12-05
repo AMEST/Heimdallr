@@ -1,0 +1,14 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Heimdallr.Security.Scrypt
+{
+    public static class ScryptModule
+    {
+        public static IServiceCollection AddScryptModule(this IServiceCollection collection)
+        {
+            collection.AddScoped<IPasswordService, PasswordService>();
+            collection.AddTransient<PasswordHashGenerator>();
+            return collection;
+        }
+    }
+}
