@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
+using Microsoft.AspNetCore.SpaServices;
+using VueCliMiddleware;
 
 namespace Heimdallr.Host
 {
@@ -43,6 +45,11 @@ namespace Heimdallr.Host
                     c.IncludeXmlComments($"{AppContext.BaseDirectory}{Path.DirectorySeparatorChar}{_env.ApplicationName}.xml");
 
                 });
+            // In production, the Vue files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         /// <summary>
@@ -61,6 +68,8 @@ namespace Heimdallr.Host
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Heimdallr API");
             });
 
+            app.UseSpaStaticFiles();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -68,6 +77,21 @@ namespace Heimdallr.Host
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                if (env.IsDevelopment())
+                {
+                    endpoints.MapToVueCliProxy(
+                        "{*path}",
+                        new SpaOptions { SourcePath = "ClientApp" },
+                        npmScript: "serve",
+                        regex: "Compiled successfully",
+                        forceKill: true
+                    );
+                }
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
             });
         }
     }
