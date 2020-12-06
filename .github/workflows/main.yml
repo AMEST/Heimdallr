@@ -55,14 +55,14 @@ jobs:
         dotnet-version: 3.1.404
     - name: Build
       run: |
-      dotnet publish ./src/Heimdallr.Cli/Heimdallr.Cli.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./bin/Heimdallr.Cli-${{ matrix.rid }}
-      zip -r ${{ matrix.rid }} ./bin/Heimdallr.Cli-${{ matrix.rid }}
+        dotnet publish ./src/Heimdallr.Cli/Heimdallr.Cli.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./bin/Heimdallr.Cli-${{ matrix.rid }}
+        zip -r ${{ matrix.rid }} ./bin/Heimdallr.Cli-${{ matrix.rid }}
     - name: Get Release File Name & Upload URL
       id: get_release_info
       run: |
-      echo ::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v}
-      value=`cat release_url.txt`
-      echo ::set-output name=upload_url::$value
+        echo ::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v}
+        value=`cat release_url.txt`
+        echo ::set-output name=upload_url::$value
       env:
         TAG_REF_NAME: ${{ github.ref }}
         REPOSITORY_NAME: ${{ github.repository }}
