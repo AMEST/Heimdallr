@@ -5,11 +5,17 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heimdallr.Host", "src\Heimdallr.Host\Heimdallr.Host.csproj", "{0B0D5030-C0B6-4F3C-B64C-C758C491B94C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heimdallr.Security", "src\Heimdallr.Security\Heimdallr.Security.csproj", "{4E9CDC2C-EF0C-4902-B927-92A96F5694BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heimdallr.Security", "src\Heimdallr.Security\Heimdallr.Security.csproj", "{4E9CDC2C-EF0C-4902-B927-92A96F5694BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heimdallr.Security.Scrypt", "src\Heimdallr.Security.Scrypt\Heimdallr.Security.Scrypt.csproj", "{41635DB9-6F94-4244-BF86-CECEDF90648B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heimdallr.Security.Scrypt", "src\Heimdallr.Security.Scrypt\Heimdallr.Security.Scrypt.csproj", "{41635DB9-6F94-4244-BF86-CECEDF90648B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heimdallr.Cli", "src\Heimdallr.Cli\Heimdallr.Cli.csproj", "{EDA436D2-70AF-41A4-8E3C-5A33E825106B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heimdallr.Securyty.Scrypt.Tests", "tests\Heimdallr.Securyty.Scrypt.Tests\Heimdallr.Securyty.Scrypt.Tests.csproj", "{AB7ED1B7-DD55-41EE-A3C2-B3633CABA987}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{213170BC-6B2B-4523-BA3D-BB11BFFB8FFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{716DE618-2329-48C4-88E5-8947864A58EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +39,20 @@ Global
 		{EDA436D2-70AF-41A4-8E3C-5A33E825106B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDA436D2-70AF-41A4-8E3C-5A33E825106B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDA436D2-70AF-41A4-8E3C-5A33E825106B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB7ED1B7-DD55-41EE-A3C2-B3633CABA987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB7ED1B7-DD55-41EE-A3C2-B3633CABA987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB7ED1B7-DD55-41EE-A3C2-B3633CABA987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB7ED1B7-DD55-41EE-A3C2-B3633CABA987}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0B0D5030-C0B6-4F3C-B64C-C758C491B94C} = {213170BC-6B2B-4523-BA3D-BB11BFFB8FFC}
+		{4E9CDC2C-EF0C-4902-B927-92A96F5694BE} = {213170BC-6B2B-4523-BA3D-BB11BFFB8FFC}
+		{41635DB9-6F94-4244-BF86-CECEDF90648B} = {213170BC-6B2B-4523-BA3D-BB11BFFB8FFC}
+		{EDA436D2-70AF-41A4-8E3C-5A33E825106B} = {213170BC-6B2B-4523-BA3D-BB11BFFB8FFC}
+		{AB7ED1B7-DD55-41EE-A3C2-B3633CABA987} = {716DE618-2329-48C4-88E5-8947864A58EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1FEB0E8B-4975-480B-9158-9BA27DC2F81C}
