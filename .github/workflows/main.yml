@@ -49,8 +49,8 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: bin/Heimdallr.Cli-${{ matrix.rid }}
-        asset_name: Heimdallr.Cli-${{ matrix.rid }}
+        file: ./${{ matrix.rid }}.zip
+        asset_name: Heimdallr.Cli-${{ matrix.rid }}.zip
         tag: ${{ github.ref }}
         overwrite: true
         body: "Builded Heimdallr Cli"
