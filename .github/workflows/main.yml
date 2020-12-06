@@ -24,37 +24,13 @@ jobs:
     - name: Build
       run: dotnet build -c Debug
 
-  release:
-    name: Create Github Release
+  publish:
     if: contains(github.ref, 'tags/v') # works only version tagged
     needs: [test]
     runs-on: ubuntu-latest
-    steps:
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-    - name: Output Release URL File
-      run: echo ${{ steps.create_release.outputs.upload_url }} > release_url.txt
-    - name: Save Release URL File for publish
-      uses: actions/upload-artifact@v1
-      with:
-        name: release_url
-        path: release_url.txt
-
-  publish:
-    if: contains(github.ref, 'tags/v') # works only version tagged
-    needs: [test, release]
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        rid: [win-x64, win-x86, linux-x64, linux-arm, osx-x64]
+        rid: [ win-x86, linux-x64, osx-x64]
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -65,7 +41,7 @@ jobs:
       uses: actions/download-artifact@v1
       with:
         name: release_url
-    - name: Setup .NET Core 3.0 (current)
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
@@ -73,22 +49,12 @@ jobs:
       run: |
         dotnet publish ./src/Heimdallr.Cli/Heimdallr.Cli.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./bin/Heimdallr.Cli-${{ matrix.rid }}
         zip -r ${{ matrix.rid }} ./bin/Heimdallr.Cli-${{ matrix.rid }}
-    - name: Get Release File Name & Upload URL
-      id: get_release_info
-      run: |
-        echo ::set-output name=file_name::${REPOSITORY_NAME##*/}-${TAG_REF_NAME##*/v}
-        value=`cat release_url.txt`
-        echo ::set-output name=upload_url::$value
-      env:
-        TAG_REF_NAME: ${{ github.ref }}
-        REPOSITORY_NAME: ${{ github.repository }}
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-        asset_path: ./${{ matrix.rid }}.zip
-        asset_name: ${{ steps.get_release_info.outputs.file_name }}-${{ matrix.rid }}.zip
-        asset_content_type: application/zip
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: bin/Heimdallr.Cli-${{ matrix.rid }}
+        asset_name: Heimdallr.Cli-${{ matrix.rid }}
+        tag: ${{ github.ref }}
+        overwrite: true
+        body: "Builded Heimdallr Cli"
