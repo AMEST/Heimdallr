@@ -15,8 +15,9 @@ This password manager solves these problems! You only need to remember one maste
 
 ## Supported platform
 * Command Line
-   * Windows
-   * Linux
+   * [Windows x86](https://github.com/AMEST/Heimdallr/releases/latest/download/Heimdallr.Cli-win-x86.zip)
+   * [Linux x64](https://github.com/AMEST/Heimdallr/releases/latest/download/Heimdallr.Cli-linux-x64.zip)
+   * [OS X x64](https://github.com/AMEST/Heimdallr/releases/latest/download/Heimdallr.Cli-osx-x64.zip)
 * WebApp
    * Hosting (any OS where works dotnet core 3.1 or Docker)
    * User Interface and API (any browser, curl, http client)
@@ -24,6 +25,10 @@ This password manager solves these problems! You only need to remember one maste
 ## How to use
 
 ### Heimdallr.CLI
+**Download build binary:**
+* [Windows x86](https://github.com/AMEST/Heimdallr/releases/latest/download/Heimdallr.Cli-win-x86.zip)
+* [Linux x64](https://github.com/AMEST/Heimdallr/releases/latest/download/Heimdallr.Cli-linux-x64.zip)
+* [OS X x64](https://github.com/AMEST/Heimdallr/releases/latest/download/Heimdallr.Cli-osx-x64.zip)
 
 **CommandLine arguments**:
 |Argument|Description|
@@ -36,7 +41,7 @@ This password manager solves these problems! You only need to remember one maste
 |--hasspecialsymbols|(Default: true) Symbolic dictionary for password generation|
 |-l|(Default: 16) Length of generated password|
 |-v|(Default: 1) Password version (if you need a new password for the same service and account)|
-|--help|Display this help screen.|
+|--help|Display help screen.|
 |--version|Display version information.|
 
 **Example (windows cmd):**
