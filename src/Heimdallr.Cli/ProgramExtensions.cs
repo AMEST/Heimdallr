@@ -1,6 +1,6 @@
-﻿using System;
-using Heimdallr.Security;
+﻿using Heimdallr.Security;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Heimdallr.Cli
 {

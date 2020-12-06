@@ -39,10 +39,16 @@ This password manager solves these problems! You only need to remember one maste
 |--help|Display this help screen.|
 |--version|Display version information.|
 
-**Example generate password (windows cmd):**
+**Example (windows cmd):**
 ```cmd
 Heimdallr.Cli.exe -s github -n user -p VerySecretMasterPassword -l 12
 ```
+Output: `ZH2C41OqnF93`
 
+**Example (linux bash):**
+```bash
+DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 ./Heimdallr.Cli -s github -n user -p VerySecretMasterPassword -l 12
+```
+Output: `ZH2C41OqnF93`
 ### Heimdallr.Host (WebApp)
 *Comming soon*

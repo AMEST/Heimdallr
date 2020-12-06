@@ -8,6 +8,9 @@
     <Copyright>Klabukov Erik</Copyright>
     <Version>0-develop</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RepositoryUrl>https://github.com/AMEST/Heimdallr</RepositoryUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
