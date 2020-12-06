@@ -22,7 +22,7 @@ jobs:
       with:
         dotnet-version: 3.1.100
     - name: Test
-      run: dotnet test -c Debug
+      run: dotnet test
 
   release:
     name: Create Github Release
@@ -68,7 +68,7 @@ jobs:
     - name: Setup .NET Core 3.0 (current)
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.404
+        dotnet-version: 3.1.100
     - name: Build
       run: |
         dotnet publish ./src/Heimdallr.Cli/Heimdallr.Cli.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./bin/Heimdallr.Cli-${{ matrix.rid }}
