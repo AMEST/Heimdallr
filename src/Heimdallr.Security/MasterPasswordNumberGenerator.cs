@@ -3,6 +3,9 @@ using System.Text;
 
 namespace Heimdallr.Security
 {
+    /// <summary>
+    /// Number generator based on MasterPassword
+    /// </summary>
     public class MasterPasswordNumberGenerator: RandomNumberGenerator
     {
         private readonly string _masterPassword;
@@ -11,6 +14,7 @@ namespace Heimdallr.Security
             _masterPassword = masterPassword;
         }
 
+        /// <inheritdoc />
         public override void GetBytes(byte[] data)
         {
             var fixedMasterPassword = Expand(_masterPassword, data.Length);

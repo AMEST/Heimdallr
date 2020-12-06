@@ -4,12 +4,18 @@ using System.Threading.Tasks;
 
 namespace Heimdallr.Host.Controllers
 {
+    /// <summary>
+    /// Password Generator Controller
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class PasswordController : ControllerBase
     {
         private readonly IPasswordService _passwordService;
 
+        /// <summary>
+        /// Controller constructor
+        /// </summary>
         public PasswordController(IPasswordService passwordService)
         {
             _passwordService = passwordService;
