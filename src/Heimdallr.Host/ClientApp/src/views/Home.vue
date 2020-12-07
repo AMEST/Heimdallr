@@ -4,18 +4,25 @@
       <v-col class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
         <PasswordGenerate />
       </v-col>
-      <v-col class="col-lg-6 col-md-6 col-sm-12 col-xs-12">2</v-col>
+      <v-col class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <InfoBlock/>
+        <SupportBlock/>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import PasswordGenerate from "../components/PasswordGenerate";
+import PasswordGenerate from "../components/PasswordGenerate"
+import InfoBlock from "../components/InfoBlock"
+import SupportBlock from "../components/SupportBlock"
 
 export default {
   name: "Home",
   components: {
-    PasswordGenerate
+    PasswordGenerate,
+    InfoBlock,
+    SupportBlock
   }
 };
 </script>

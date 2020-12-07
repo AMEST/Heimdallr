@@ -3,7 +3,7 @@
     <v-app-bar class="bar-transparent" app dark dense elevate-on-scroll>
       <v-container>
         <v-toolbar-title>
-          <img src="/img/shield.svg" style="vertical-align: middle;" width="32px"/>
+          <img src="/img/icons/android-chrome-512x512.png" style="vertical-align: middle;" width="32px"/>
           Heimdallr
         </v-toolbar-title>
       </v-container>
@@ -30,7 +30,7 @@ export default {
   height: calc(100vh - 54px) !important;
 }
 .bg {
-  background: url(/img/bg.21335f0f.svg) !important;
+  background: url(/img/bg.21335f0f.svg) no-repeat fixed !important;
   background-size: cover !important;
 }
 .bar-transparent {
