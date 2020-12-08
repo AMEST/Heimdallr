@@ -1,12 +1,18 @@
 <template>
   <v-app class="bg">
     <v-app-bar class="bar-transparent" app dark dense elevate-on-scroll>
-      <v-container>
         <v-toolbar-title>
-          <img src="/img/icons/android-chrome-512x512.png" style="vertical-align: middle;" width="32px"/>
+          <img
+            src="/img/icons/android-chrome-512x512.png"
+            style="vertical-align: middle;"
+            width="32px"
+          />
           Heimdallr
         </v-toolbar-title>
-      </v-container>
+        <v-spacer></v-spacer>
+        <div style="color:rgba(255, 255, 255, 0.8);">
+          Version: {{this.version}}
+        </div>
     </v-app-bar>
 
     <v-main>
@@ -20,8 +26,19 @@ export default {
   name: "App",
 
   data: () => ({
-    //
-  })
+    version: ""
+  }),
+  created: function() {
+    var self = this;
+    var request = new XMLHttpRequest();
+    request.open("GET", "/api/version");
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onload = function() {
+      var result = JSON.parse(request.response);
+      self.version = result.version;
+    };
+    request.send();
+  }
 };
 </script>
 

@@ -18,6 +18,9 @@ export default {
 </script>
 
 <style scoped>
+.info-block{
+  padding-left: 5px;
+}
 .info-block h2 {
   color: white;
 }
