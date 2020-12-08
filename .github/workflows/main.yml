@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: dotnet build -c Debug
 
-  publish:
+  publish-cli-binary:
     if: contains(github.ref, 'tags/v') # works only version tagged
     needs: [test]
     runs-on: ubuntu-latest
@@ -54,3 +54,50 @@ jobs:
         tag: ${{ github.ref }}
         overwrite: true
         body: "Builded Heimdallr Cli"
+  publish-webapp-binary:
+    if: contains(github.ref, 'tags/v') # works only version tagged
+    needs: [test]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rid: [ win-x86, linux-x64, osx-x64]
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      NUGET_XMLDOC_MODE: skip
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.100
+    - name: Build
+      run: |
+        dotnet publish ./src/Heimdallr.Host/Heimdallr.Host.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./bin/Heimdallr.Host-${{ matrix.rid }}
+        zip -r ${{ matrix.rid }} ./bin/Heimdallr.Host-${{ matrix.rid }}
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./${{ matrix.rid }}.zip
+        asset_name: Heimdallr.Host-${{ matrix.rid }}.zip
+        tag: ${{ github.ref }}
+        overwrite: true
+        body: "Builded Heimdallr.Host"
+  publish-docker-webapp:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+        # Runs a single command using the runners shell
+    - uses: actions/checkout@master
+    - run: git fetch --prune --unshallow
+    - name: Build Docker container And Push HeimdallrWebApp
+      uses: docker/build-push-action@v1.1.0
+      with:
+        repository: eluki/heimdallr-password-manager
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        target: Heimdallr
+        tag_with_ref: true
+        push: ${{ github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/') }}
