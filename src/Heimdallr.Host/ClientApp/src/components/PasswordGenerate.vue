@@ -175,6 +175,7 @@ export default {
       this.generatedPassword = "";
     },
     CopyToClipboard: function() {
+      /*eslint-disable*/
       if (window.clipboardData && window.clipboardData.setData) {
         // IE specific code path to prevent textarea being shown while dialog is visible.
         return window.clipboardData.setData("Text", this.generatedPassword);
@@ -195,6 +196,7 @@ export default {
         } finally {
           document.body.removeChild(textarea);
         }
+        /*eslint-enable*/
       }
     },
     ShowAlert: function(text) {

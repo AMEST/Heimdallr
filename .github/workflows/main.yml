@@ -71,6 +71,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
+    - name: Setup NodeJs
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14'
     - name: Build
       run: |
         dotnet publish ./src/Heimdallr.Host/Heimdallr.Host.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./bin/Heimdallr.Host-${{ matrix.rid }}
