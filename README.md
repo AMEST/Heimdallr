@@ -11,7 +11,12 @@ This password manager solves these problems! You only need to remember one maste
 
 ## Components of the Heimdallr project
 1. Heimdallr.CLI - Console application that can be run under windows, linux and get the service password right in the console
-1. Heimdallr.Host - Web application (API and SPA (soon)) with which you can get a password for the service you need right in the browser, without installing any software
+
+[![Heimdallr CLI](https://i.postimg.cc/6Q24QSRV/image.png)](https://postimg.cc/1gS3Cvv4)
+
+1. Heimdallr.Host - Web application with which you can get a password for the service you need right in the browser, without installing any software
+
+[![Heimdallr WebApp](https://i.postimg.cc/zvmC5NcR/2020-12-08-08-55-36-localhost-bfe2d743ed69.png)](https://postimg.cc/XG8GcR3V)
 
 ## Supported platform
 * Command Line
@@ -56,4 +61,39 @@ DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 ./Heimdallr.Cli -s github -n user -p Ver
 ```
 Output: `ZH2C41OqnF93`
 ### Heimdallr.Host (WebApp)
-*Comming soon*
+
+**Docker Compose:**
+
+```yml
+version: '3.8'
+
+services:
+  host:
+    image: eluki/heimdallr-password-manager
+    ports:
+     - target: 80
+       published: 30003
+       protocol: tcp
+       mode: host
+    deploy:
+      replicas: 1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "3m"
+        max-file: "3"
+```
+
+Run stack:
+```docker
+docker stack deploy -c deploy.yml heimdallr
+```
+
+**Docker Run:**
+```docker
+docker run -d \
+           -p 30003:80 \
+           --restart always \
+           --name heimdallr \
+           eluki/heimdallr-password-manager
+```
