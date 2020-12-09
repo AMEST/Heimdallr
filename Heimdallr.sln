@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heimdallr.Security", "src\H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heimdallr.Security.Scrypt", "src\Heimdallr.Security.Scrypt\Heimdallr.Security.Scrypt.csproj", "{41635DB9-6F94-4244-BF86-CECEDF90648B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heimdallr.Cli", "src\Heimdallr.Cli\Heimdallr.Cli.csproj", "{EDA436D2-70AF-41A4-8E3C-5A33E825106B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heimdallr.Cli", "src\Heimdallr.Cli\Heimdallr.Cli.csproj", "{EDA436D2-70AF-41A4-8E3C-5A33E825106B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heimdallr.Securyty.Scrypt.Tests", "tests\Heimdallr.Securyty.Scrypt.Tests\Heimdallr.Securyty.Scrypt.Tests.csproj", "{AB7ED1B7-DD55-41EE-A3C2-B3633CABA987}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heimdallr.Security.Scrypt.Tests", "tests\Heimdallr.Security.Scrypt.Tests\Heimdallr.Security.Scrypt.Tests.csproj", "{AB7ED1B7-DD55-41EE-A3C2-B3633CABA987}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{213170BC-6B2B-4523-BA3D-BB11BFFB8FFC}"
 EndProject

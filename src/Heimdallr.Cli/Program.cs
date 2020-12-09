@@ -19,7 +19,11 @@ namespace Heimdallr.Cli
             var container = ProgramExtensions.ConfigureApp(services => services.AddScryptModule());
             var passwordService = container.GetPasswordService();
 
-            var password = passwordService.Generate(config.ToSecurityRequest())
+            var securityRequest = config.ToSecurityRequest();
+
+            securityRequest.Validate();
+
+            var password = passwordService.Generate(securityRequest)
                 .GetAwaiter()
                 .GetResult();
 

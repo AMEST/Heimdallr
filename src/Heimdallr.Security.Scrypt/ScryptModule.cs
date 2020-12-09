@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly:InternalsVisibleTo("Heimdallr.Securyty.Scrypt.Tests")]
+[assembly:InternalsVisibleTo("Heimdallr.Security.Scrypt.Tests")]
 namespace Heimdallr.Security.Scrypt
 {
     public static class ScryptModule

@@ -1,6 +1,7 @@
 ﻿using Heimdallr.Security;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Heimdallr.Cli
 {
@@ -32,5 +33,14 @@ namespace Heimdallr.Cli
                 Version = config.Version
             };
         }
+
+        public static void Validate(this object validateObject)
+        {
+            if (!(validateObject is IValidatableObject)) return;
+
+            var ctx = new ValidationContext(validateObject);
+            Validator.ValidateObject(validateObject, ctx, true);
+        }
+
     }
 }
