@@ -1,6 +1,11 @@
+![Heimdallr Build](https://github.com/AMEST/Heimdallr/workflows/Heimdallr%20Build/badge.svg?branch=master)
+![hub.docker.com](https://img.shields.io/docker/pulls/eluki/heimdallr-password-manager.svg)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/amest/Heimdallr)
 ![GitHub](https://img.shields.io/github/license/amest/Heimdallr)
 # Heimdallr
+### Links
+* **[Heimdallr app](https://heimdallr.nb-47-dev.tk)**  
+* **[Docker image](https://hub.docker.com/r/eluki/heimdallr-password-manager)**
 ## Description
 Heimdall is a stateless password manager / generator.
 Tired of constantly remembering your password for a website or application? 
