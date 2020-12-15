@@ -1,8 +1,7 @@
-﻿using System;
-using System.Globalization;
-using System.Threading;
-using CommandLine;
+﻿using CommandLine;
 using Heimdallr.Security.Scrypt;
+using PanoramicData.ConsoleExtensions;
+using System;
 
 namespace Heimdallr.Cli
 {
@@ -18,6 +17,13 @@ namespace Heimdallr.Cli
         {
             var container = ProgramExtensions.ConfigureApp(services => services.AddScryptModule());
             var passwordService = container.GetPasswordService();
+
+            if (string.IsNullOrEmpty(config.MasterPassword))
+            {
+                Console.Write("Master Password:");
+                config.MasterPassword = ConsolePlus.ReadPassword();
+                Console.WriteLine();
+            }
 
             var securityRequest = config.ToSecurityRequest();
 

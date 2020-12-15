@@ -18,7 +18,6 @@ namespace Heimdallr.Cli
         public string CommonName { get; set; }
 
         [Option('p',"mpwd",
-            Required = true,
             HelpText = "Master password to generate an idempotent password based on the service name and common name and the dictionary used")]
         public string MasterPassword { get; set; }
 
