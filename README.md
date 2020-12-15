@@ -19,7 +19,7 @@ This password manager solves these problems! You only need to remember one maste
 
 [![Heimdallr CLI](https://i.postimg.cc/6Q24QSRV/image.png)](https://postimg.cc/1gS3Cvv4)
 
-1. Heimdallr.Host - Web application with which you can get a password for the service you need right in the browser, without installing any software
+2. Heimdallr.Host - Web application with which you can get a password for the service you need right in the browser, without installing any software
 
 [![Heimdallr WebApp](https://i.postimg.cc/zvmC5NcR/2020-12-08-08-55-36-localhost-bfe2d743ed69.png)](https://postimg.cc/XG8GcR3V)
 
@@ -45,7 +45,7 @@ This password manager solves these problems! You only need to remember one maste
 |--------|-----------|
 |-s, --service|Required. Service name for which the password is generated|
 |-n, --name|Required. Service account or password ID|
-|-p, --mpwd|Required. Master password to generate an idempotent password based on the service name and common name and the dictionary used|
+|-p, --mpwd|Master password to generate an idempotent password based on the service name and common name and the dictionary used|
 |--hasnumeric|(Default: true) Numeric dictionary for password generation|
 |--hasletters|(Default: true) Letter dictionary for password generation|
 |--hasspecialsymbols|(Default: true) Symbolic dictionary for password generation|
