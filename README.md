@@ -3,7 +3,17 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/amest/Heimdallr)
 ![GitHub](https://img.shields.io/github/license/amest/Heimdallr)
 # Heimdallr
-### Links
+
+- [Heimdallr](#heimdallr)
+  - [Links](#links)
+  - [Description](#description)
+  - [Components of the Heimdallr project](#components-of-the-heimdallr-project)
+  - [Supported platform](#supported-platform)
+  - [How to use](#how-to-use)
+    - [Heimdallr.CLI](#heimdallrcli)
+    - [Heimdallr.Host (WebApp) Docker](#heimdallrhost-webapp-docker)
+
+## Links
 * **[Heimdallr app](https://heimdallr.nb-47-dev.tk)**  
 * **[Docker image](https://hub.docker.com/r/eluki/heimdallr-password-manager)**
 ## Description
@@ -41,18 +51,18 @@ This password manager solves these problems! You only need to remember one maste
 * [OS X x64](https://github.com/AMEST/Heimdallr/releases/latest/download/Heimdallr.Cli-osx-x64.zip)
 
 **CommandLine arguments**:
-|Argument|Description|
-|--------|-----------|
-|-s, --service|Required. Service name for which the password is generated|
-|-n, --name|Required. Service account or password ID|
-|-p, --mpwd|Master password to generate an idempotent password based on the service name and common name and the dictionary used|
-|--hasnumeric|(Default: true) Numeric dictionary for password generation|
-|--hasletters|(Default: true) Letter dictionary for password generation|
-|--hasspecialsymbols|(Default: true) Symbolic dictionary for password generation|
-|-l|(Default: 16) Length of generated password|
-|-v|(Default: 1) Password version (if you need a new password for the same service and account)|
-|--help|Display help screen.|
-|--version|Display version information.|
+|      Argument       |                                                     Description                                                      |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| -s, --service       | Required. Service name for which the password is generated                                                           |
+| -n, --name          | Required. Service account or password ID                                                                             |
+| -p, --mpwd          | Master password to generate an idempotent password based on the service name and common name and the dictionary used |
+| --hasnumeric        | (Default: true) Numeric dictionary for password generation                                                           |
+| --hasletters        | (Default: true) Letter dictionary for password generation                                                            |
+| --hasspecialsymbols | (Default: true) Symbolic dictionary for password generation                                                          |
+| -l                  | (Default: 16) Length of generated password                                                                           |
+| -v                  | (Default: 1) Password version (if you need a new password for the same service and account)                          |
+| --help              | Display help screen.                                                                                                 |
+| --version           | Display version information.                                                                                         |
 
 **Example (windows cmd):**
 ```cmd
@@ -65,7 +75,7 @@ Output: `ZH2C41OqnF93`
 DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 ./Heimdallr.Cli -s github -n user -p VerySecretMasterPassword -l 12
 ```
 Output: `ZH2C41OqnF93`
-### Heimdallr.Host (WebApp)
+### Heimdallr.Host (WebApp) Docker
 
 **Docker Compose:**
 
