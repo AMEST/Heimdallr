@@ -47,7 +47,7 @@ export default {
   height: calc(100vh - 54px) !important;
 }
 .bg {
-  background: url(/img/bg.21335f0f.svg) no-repeat fixed !important;
+  background: url(/img/bg.png) no-repeat fixed !important;
   background-size: cover !important;
 }
 .bar-transparent {
