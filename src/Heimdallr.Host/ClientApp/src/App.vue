@@ -47,8 +47,11 @@ export default {
   height: calc(100vh - 54px) !important;
 }
 .bg {
-  background: url(/img/bg.21335f0f.svg) no-repeat fixed !important;
-  background-size: cover !important;
+    background: -webkit-linear-gradient(top, rgb(43, 69, 159) 0%, rgb(27, 121, 232) 100%) !important;
+    background: -o-linear-gradient(top, rgb(43, 69, 159) 0%, rgb(27, 121, 232) 100%) !important;
+    background: -ms-linear-gradient(top, rgb(43, 69, 159) 0%, rgb(27, 121, 232) 100%) !important;
+    background: -moz-linear-gradient(top, rgb(43, 69, 159) 0%, rgb(27, 121, 232) 100%) !important;
+    background: linear-gradient(to bottom, rgb(43, 69, 159) 0%, rgb(27, 121, 232) 100%) !important;
 }
 .bar-transparent {
   background-color: rgba(0, 0, 0, 0.4) !important;
