@@ -14,7 +14,7 @@
     - [Heimdallr.Host (WebApp) Docker](#heimdallrhost-webapp-docker)
 
 ## Links
-* **[Heimdallr app](https://heimdallr.nb-47-dev.tk)**  
+* **[Heimdallr app](https://heimdallr.nb-47.ml)**  
 * **[Docker image](https://hub.docker.com/r/eluki/heimdallr-password-manager)**
 ## Description
 Heimdall is a stateless password manager / generator.
