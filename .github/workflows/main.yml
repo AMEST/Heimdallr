@@ -16,7 +16,9 @@ jobs:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       NUGET_XMLDOC_MODE: skip
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Setup .NET Core ${{ matrix.dotnet-version }}
       uses: actions/setup-dotnet@v1
       with:
@@ -36,7 +38,9 @@ jobs:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       NUGET_XMLDOC_MODE: skip
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -66,7 +70,9 @@ jobs:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       NUGET_XMLDOC_MODE: skip
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -94,8 +100,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
         # Runs a single command using the runners shell
-    - uses: actions/checkout@master
-    - run: git fetch --prune --unshallow
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Build Docker container And Push HeimdallrWebApp
       uses: docker/build-push-action@v1.1.0
       with:
