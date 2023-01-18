@@ -14,7 +14,7 @@
     </v-card>
     <v-card class="support-card mr-4 mt-2" href="https://github.com/AMEST/Heimdallr">
       <v-icon size="100px">mdi-github</v-icon>
-      <v-card-text>For me on github</v-card-text>
+      <v-card-text>Fork me on github</v-card-text>
     </v-card>
   </div>
 </template>
