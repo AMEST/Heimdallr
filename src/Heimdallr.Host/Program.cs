@@ -1,29 +1,55 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Heimdallr.Security.Scrypt;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.SpaServices;
+using VueCliMiddleware;
 
-namespace Heimdallr.Host;
+var builder = WebApplication.CreateBuilder(args);
 
-/// <summary>
-/// Main class of program
-/// </summary>
-public class Program
+builder.Services.AddControllers();
+builder.Services.AddScryptModule();
+builder.Services.AddSwaggerGen();
+// In production, the Vue files will be served from this directory
+builder.Services.AddSpaStaticFiles(configuration =>
 {
-    /// <summary>
-    /// App EntryPoint
-    /// </summary>
-    public static async Task Main(string[] args)
-    {
-        await CreateHostBuilder(args).Build().RunAsync();
-    }
+    configuration.RootPath = "ClientApp/dist";
+});
 
-    /// <summary>
-    /// Create and Configure HostBuilder
-    /// </summary>
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+var forwardedHeadersOptions = new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+    RequireHeaderSymmetry = false
+};
+forwardedHeadersOptions.KnownNetworks.Clear();
+forwardedHeadersOptions.KnownProxies.Clear();
+
+app.UseForwardedHeaders(forwardedHeadersOptions);
+
+if (app.Environment.IsDevelopment())
+    app.UseDeveloperExceptionPage();
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseSpaStaticFiles();
+app.UseRouting();
+app.MapControllers();
+if (app.Environment.IsDevelopment())
+{
+    app.MapToVueCliProxy(
+        "{*path}",
+        new SpaOptions { SourcePath = "ClientApp" },
+        npmScript: "serve",
+        regex: "Compiled successfully",
+        forceKill: true
+    );
 }
+
+app.UseSpa(spa =>
+{
+    spa.Options.SourcePath = "ClientApp";
+});
+
+app.Run();
