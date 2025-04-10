@@ -77,7 +77,7 @@
             </v-col>
           </v-row>
         </v-form>
-        <div align="right" v-if="!firstGenerated">
+        <div class="mt-2" align="right" v-if="!firstGenerated">
           <v-btn class="ma-2" outlined color="indigo" @click="Generate">Generate</v-btn>
         </div>
         <v-row class="pt-4 pl-3" v-if="firstGenerated">
