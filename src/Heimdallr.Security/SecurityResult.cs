@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Heimdallr.Security
-{
-    public class SecurityResult
-    {
-        public string GeneratedPassword { get; set; }
+namespace Heimdallr.Security;
 
-        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
-    }
+public class SecurityResult
+{
+    public string GeneratedPassword { get; set; }
+
+    public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 }

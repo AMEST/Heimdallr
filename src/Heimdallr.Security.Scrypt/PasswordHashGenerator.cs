@@ -3,38 +3,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Heimdallr.Security.Scrypt
+namespace Heimdallr.Security.Scrypt;
+
+internal class PasswordHashGenerator
 {
-    internal class PasswordHashGenerator
+    private const int DefaultIterationCount = 16384;
+    private const int DefaultBlockSize = 8;
+    private const int DefaultThreadCount = 1;
+
+    public async Task<string> GenerateHash(SecurityRequest request)
     {
-        private const int DefaultIterationCount = 16384;
-        private const int DefaultBlockSize = 8;
-        private const int DefaultThreadCount = 1;
+        var masterPasswordNumberGenerator = new MasterPasswordNumberGenerator(request.MasterPassword);
+        var encoder = new ScryptEncoder(
+            iterationCount: DefaultIterationCount, 
+            blockSize: DefaultBlockSize,
+            threadCount: DefaultThreadCount, 
+            saltGenerator: masterPasswordNumberGenerator);
+        var passwordBase = CreatePasswordBase(request);
 
-        public async Task<string> GenerateHash(SecurityRequest request)
-        {
-            var masterPasswordNumberGenerator = new MasterPasswordNumberGenerator(request.MasterPassword);
-            var encoder = new ScryptEncoder(
-                iterationCount: DefaultIterationCount, 
-                blockSize: DefaultBlockSize,
-                threadCount: DefaultThreadCount, 
-                saltGenerator: masterPasswordNumberGenerator);
-            var passwordBase = CreatePasswordBase(request);
+        var passwordHash = await Task.Run(() => encoder.Encode(passwordBase));
 
-            var passwordHash = await Task.Run(() => encoder.Encode(passwordBase));
+        return passwordHash.Split('$').Last();
+    }
 
-            return passwordHash.Split('$').Last();
-        }
-
-        private static string CreatePasswordBase(SecurityRequest request)
-        {
-            var builder = new StringBuilder();
-            builder.Append(request.ServiceName);
-            builder.Append(":");
-            builder.Append(request.CommonName);
-            builder.Append(":");
-            builder.Append("v").Append(request.Version);
-            return builder.ToString();
-        }
+    private static string CreatePasswordBase(SecurityRequest request)
+    {
+        var builder = new StringBuilder();
+        builder.Append(request.ServiceName);
+        builder.Append(":");
+        builder.Append(request.CommonName);
+        builder.Append(":");
+        builder.Append("v").Append(request.Version);
+        return builder.ToString();
     }
 }

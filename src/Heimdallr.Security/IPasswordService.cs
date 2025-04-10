@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 
-namespace Heimdallr.Security
+namespace Heimdallr.Security;
+
+public interface IPasswordService
 {
-    public interface IPasswordService
-    {
-        /// <summary>
-        /// Generate password from request
-        /// </summary>
-        Task<SecurityResult> Generate(SecurityRequest passwordRequest);
-    }
+    /// <summary>
+    /// Generate password from request
+    /// </summary>
+    Task<SecurityResult> Generate(SecurityRequest passwordRequest);
 }

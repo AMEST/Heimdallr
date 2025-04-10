@@ -54,22 +54,22 @@ namespace Heimdallr.Security
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!HasNumeric && !HasLetters && !HasSpecialSymbols)
-                return new[]
-                {
+                return
+                [
                     new ValidationResult(
                         "The following fields cannot be simultaneously false",
                         new[] {nameof(HasNumeric),nameof(HasLetters),nameof(HasSpecialSymbols)})
-                };
+                ];
 
             if(Length < 8 || Length > 32 )
-                return new[]
-                {
+                return
+                [
                     new ValidationResult(
                         "Length cannot less than 8 and more than 32",
                         new[] {nameof(Length)})
-                };
+                ];
 
-            return new[] { ValidationResult.Success };
+            return [ValidationResult.Success];
         }
     }
 }
