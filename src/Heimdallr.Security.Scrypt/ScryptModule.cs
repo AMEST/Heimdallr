@@ -2,15 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly:InternalsVisibleTo("Heimdallr.Security.Scrypt.Tests")]
-namespace Heimdallr.Security.Scrypt
+namespace Heimdallr.Security.Scrypt;
+
+public static class ScryptModule
 {
-    public static class ScryptModule
+    public static IServiceCollection AddScryptModule(this IServiceCollection collection)
     {
-        public static IServiceCollection AddScryptModule(this IServiceCollection collection)
-        {
-            collection.AddScoped<IPasswordService, PasswordService>();
-            collection.AddTransient<PasswordHashGenerator>();
-            return collection;
-        }
+        collection.AddScoped<IPasswordService, PasswordService>();
+        collection.AddTransient<PasswordHashGenerator>();
+        return collection;
     }
 }

@@ -3,37 +3,36 @@ using Heimdallr.Security.Scrypt;
 using PanoramicData.ConsoleExtensions;
 using System;
 
-namespace Heimdallr.Cli
+namespace Heimdallr.Cli;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        Parser.Default.ParseArguments<Configuration>(args)
+            .WithParsed(Run);
+    }
+
+    public static void Run(Configuration config)
+    {
+        var container = ProgramExtensions.ConfigureApp(services => services.AddScryptModule());
+        var passwordService = container.GetPasswordService();
+
+        if (string.IsNullOrEmpty(config.MasterPassword))
         {
-            Parser.Default.ParseArguments<Configuration>(args)
-                .WithParsed(Run);
+            Console.Write("Master Password:");
+            config.MasterPassword = ConsolePlus.ReadPassword();
+            Console.WriteLine();
         }
 
-        public static void Run(Configuration config)
-        {
-            var container = ProgramExtensions.ConfigureApp(services => services.AddScryptModule());
-            var passwordService = container.GetPasswordService();
+        var securityRequest = config.ToSecurityRequest();
 
-            if (string.IsNullOrEmpty(config.MasterPassword))
-            {
-                Console.Write("Master Password:");
-                config.MasterPassword = ConsolePlus.ReadPassword();
-                Console.WriteLine();
-            }
+        securityRequest.Validate();
 
-            var securityRequest = config.ToSecurityRequest();
+        var password = passwordService.Generate(securityRequest)
+            .GetAwaiter()
+            .GetResult();
 
-            securityRequest.Validate();
-
-            var password = passwordService.Generate(securityRequest)
-                .GetAwaiter()
-                .GetResult();
-
-            Console.WriteLine(password.GeneratedPassword);
-        }
+        Console.WriteLine(password.GeneratedPassword);
     }
 }

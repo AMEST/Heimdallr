@@ -22,7 +22,7 @@ jobs:
     - name: Setup .NET Core ${{ matrix.dotnet-version }}
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.100
+        dotnet-version: 9.0.203
     - name: Build
       run: dotnet build -c Debug
 
@@ -44,10 +44,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.100
+        dotnet-version: 9.0.203
     - name: Build
       run: |
-        dotnet publish ./src/Heimdallr.Cli/Heimdallr.Cli.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./bin/Heimdallr.Cli-${{ matrix.rid }}
+        dotnet publish ./src/Heimdallr.Cli/Heimdallr.Cli.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false -o ./bin/Heimdallr.Cli-${{ matrix.rid }}
         zip -r ${{ matrix.rid }} ./bin/Heimdallr.Cli-${{ matrix.rid }}
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
@@ -76,14 +76,14 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.100
+        dotnet-version: 9.0.203
     - name: Setup NodeJs
       uses: actions/setup-node@v1
       with:
-        node-version: '14'
+        node-version: '20'
     - name: Build
       run: |
-        dotnet publish ./src/Heimdallr.Host/Heimdallr.Host.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./bin/Heimdallr.Host-${{ matrix.rid }}
+        dotnet publish ./src/Heimdallr.Host/Heimdallr.Host.csproj -c Release --self-contained -r ${{ matrix.rid }} -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false -o ./bin/Heimdallr.Host-${{ matrix.rid }}
         zip -r ${{ matrix.rid }} ./bin/Heimdallr.Host-${{ matrix.rid }}
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
