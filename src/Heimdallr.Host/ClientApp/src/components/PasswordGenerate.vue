@@ -1,7 +1,13 @@
 <template>
   <div align="center">
     <v-card elevation="2">
-      <v-card-title>Generate password</v-card-title>
+      <v-card-title>
+        Generate password
+        <v-spacer></v-spacer>
+        <v-btn icon @click="openHistory" class="ml-2">
+          <v-icon>mdi-history</v-icon>
+        </v-btn>
+      </v-card-title>
       <v-card-text>
         <v-form ref="form" v-model="formValidation.state" lazy-validation>
           <v-row>
@@ -76,6 +82,14 @@
               ></number-input>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col class="col-lg-12 disable-top-bottom-padding">
+              <v-checkbox
+                v-model="saveToHistory"
+                label="Save to history"
+              ></v-checkbox>
+            </v-col>
+          </v-row>
         </v-form>
         <div class="mt-2" align="right" v-if="!firstGenerated">
           <v-btn class="ma-2" outlined color="indigo" @click="Generate">Generate</v-btn>
@@ -105,14 +119,27 @@
       type="error"
       elevation="4"
     >{{error.text}}</v-alert>
+
+    <history-modal
+      :dialog="historyDialog"
+      :history="history"
+      @apply-history="applyHistory"
+      @delete-history-item="deleteHistoryItem"
+      @clear-history="clearHistory"
+      @close="historyDialog = false"
+    />
   </div>
 </template>
 
 <script>
 // eslint-disable-next-line
 import VueNumberInput from "@chenfengyuan/vue-number-input";
+import HistoryModal from "./HistoryModal.vue";
 export default {
   name: "PasswordGenerate",
+  components: {
+    HistoryModal
+  },
   data: () => {
     return {
       securityRequest: {
@@ -125,6 +152,9 @@ export default {
         length: 16,
         version: 1
       },
+      saveToHistory: localStorage.getItem('saveToHistoryEnabled') === 'true' || false,
+      historyDialog: false,
+      history: [],
       masterPasswordShow: false,
       firstGenerated: false,
       generatedPassword: "",
@@ -144,6 +174,11 @@ export default {
         ]
       }
     };
+  },
+  watch: {
+    saveToHistory: function(newVal) {
+      localStorage.setItem('saveToHistoryEnabled', newVal);
+    }
   },
   methods: {
     Generate: function() {
@@ -167,6 +202,32 @@ export default {
 
         self.generatedPassword = result.generatedPassword;
         self.firstGenerated = true;
+        
+        if (self.saveToHistory) {
+          const history = JSON.parse(localStorage.getItem('generateHistory') || '[]');
+          const existingIndex = history.findIndex(item => 
+            item.serviceName === self.securityRequest.serviceName &&
+            item.commonName === self.securityRequest.commonName
+          );
+
+          const historyItem = {
+            serviceName: self.securityRequest.serviceName,
+            commonName: self.securityRequest.commonName,
+            version: self.securityRequest.version,
+            hasLetters: self.securityRequest.hasLetters,
+            hasNumeric: self.securityRequest.hasNumeric,
+            hasSpecialSymbols: self.securityRequest.hasSpecialSymbols,
+            length: self.securityRequest.length
+          };
+
+          if (existingIndex !== -1) {
+            history[existingIndex] = historyItem;
+          } else {
+            history.push(historyItem);
+          }
+
+          localStorage.setItem('generateHistory', JSON.stringify(history));
+        }
       };
       request.send(JSON.stringify(this.securityRequest));
     },
@@ -209,6 +270,28 @@ export default {
           self.error.state = false;
           self.error.text = "";
         }, 15000));
+    },
+    openHistory: function() {
+      this.history = JSON.parse(localStorage.getItem('generateHistory') || '[]');
+      this.historyDialog = true;
+    },
+    applyHistory: function(item) {
+      this.securityRequest.serviceName = item.serviceName;
+      this.securityRequest.commonName = item.commonName;
+      this.securityRequest.version = item.version;
+      this.securityRequest.hasLetters = item.hasLetters;
+      this.securityRequest.hasNumeric = item.hasNumeric;
+      this.securityRequest.hasSpecialSymbols = item.hasSpecialSymbols;
+      this.securityRequest.length = item.length;
+      this.historyDialog = false;
+    },
+    deleteHistoryItem: function(index) {
+      this.history.splice(index, 1);
+      localStorage.setItem('generateHistory', JSON.stringify(this.history));
+    },
+    clearHistory: function() {
+      this.history = [];
+      localStorage.removeItem('generateHistory');
     }
   }
 };
