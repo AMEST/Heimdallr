@@ -25,4 +25,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0-bookworm-slim as Heimdallr
 COPY --from=build /app /Heimdallr
 WORKDIR /Heimdallr
 EXPOSE 80
+ENV ASPNETCORE_URLS=http://*:80
 ENTRYPOINT ["dotnet", "Heimdallr.Host.dll"]
