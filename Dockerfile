@@ -1,7 +1,8 @@
 FROM alpine/git as version
 WORKDIR /src
 COPY . /src
-RUN echo $(git describe --tags --always 2>/dev/null) > /version
+RUN echo $(git describe --tags --always 2>/dev/null | cut -d '-' -f 1,2) > /version
+RUN echo "Computed version `cat /version`"
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 COPY . /build

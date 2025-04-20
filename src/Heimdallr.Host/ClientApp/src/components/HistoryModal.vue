@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="600" @input="$emit('close')">
     <v-card>
       <v-card-title>
-        Password Generation History
+        History
         <v-btn icon @click="clearHistory">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
