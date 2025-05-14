@@ -10,6 +10,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <RepositoryUrl>https://github.com/AMEST/Heimdallr</RepositoryUrl>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
   <ItemGroup>
     <RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />

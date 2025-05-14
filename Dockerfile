@@ -16,7 +16,7 @@ RUN apt-get update -yq ;\
 RUN sed -i -e "s/<Version>0-develop<\/Version>/<Version>$(cat version | cut -c2- )<\/Version>/g" src/Heimdallr.Host/Heimdallr.Host.csproj;\
     dotnet restore -s https://api.nuget.org/v3/index.json; \
     dotnet build --no-restore -c Release; \    
-    dotnet publish ./src/Heimdallr.Host/Heimdallr.Host.csproj -c Release -o /app --no-build /p:IncludeSourceRevisionInInformationalVersion=false; \
+    dotnet publish ./src/Heimdallr.Host/Heimdallr.Host.csproj -c Release -o /app --no-build; \
     dotnet nuget locals http-cache --clear;\
     dotnet nuget locals temp --clear
 
