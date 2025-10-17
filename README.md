@@ -39,7 +39,7 @@ This password manager solves these problems! You only need to remember one maste
    * [Linux x64](https://github.com/AMEST/Heimdallr/releases/latest/download/Heimdallr.Cli-linux-x64.zip)
    * [OS X x64](https://github.com/AMEST/Heimdallr/releases/latest/download/Heimdallr.Cli-osx-x64.zip)
 * WebApp
-   * Hosting (any OS where works dotnet core 3.1 or Docker)
+   * Hosting (any OS where works .NET 9 or Docker)
    * User Interface and API (any browser, curl, http client)
 
 ## How to use
