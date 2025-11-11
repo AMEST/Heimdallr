@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Heimdallr.Cli/Heimdallr.Cli.csproj" />
+    <Project Path="src/Heimdallr.Host/Heimdallr.Host.csproj" />
+    <Project Path="src/Heimdallr.Security.Scrypt/Heimdallr.Security.Scrypt.csproj" />
+    <Project Path="src/Heimdallr.Security/Heimdallr.Security.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Heimdallr.Security.Scrypt.Tests/Heimdallr.Security.Scrypt.Tests.csproj" />
+  </Folder>
+</Solution>
